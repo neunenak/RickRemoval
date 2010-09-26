@@ -178,7 +178,6 @@ var blocklist = [
 "rickrolled.fr",
 "rickrolling.com/lol",
 "rr.rezbit.com",
-"rr.rezbit.com/blog/021107/rick-astley-speaks-about-rickroll.html",
 "rubyurl.com/1H1G",
 "rurl.org/2vq",
 "sirpnut.info/sorry.jpg",
