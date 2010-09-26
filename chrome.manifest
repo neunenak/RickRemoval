@@ -1,0 +1,2 @@
+content	rickremoval	content/
+overlay	chrome://browser/content/browser.xul	chrome://rickremoval/content/script-compiler-overlay.xul
