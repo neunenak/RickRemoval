@@ -10,7 +10,8 @@
 var body;
 var html;
 
-var blocklist = ["_0719DxMOUY",
+var blocklist = [
+"_0719DxMOUY",
 "_FyXC-SsAPE",
 "1227.com",
 "1V_aE_Xdde8",
@@ -224,7 +225,8 @@ var blocklist = ["_0719DxMOUY",
 ];
 
 
-var adlist = ["googlesyndication.com",
+var adlist = [
+"googlesyndication.com",
 "doubleclick.net",
 "stumbleupon.com/badge/embed",
 "facebook.com/plugins",
