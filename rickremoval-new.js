@@ -37,7 +37,17 @@ function getStrictness() {
 
 
 function strictCheck() {
-	// heuristic check, return # of matches
+	var count = 0;
+	var arr;
+	arr = html.match(/(ric?k|barac?k) ?roll/gi);
+	if (arr != null) {
+		count += arr.length;
+	}
+	arr = html.match(/never gonna (give you up|let you down)/gi);
+	if (arr != null) {
+		count += arr.length;
+	}
+	return count;
 }
 
 
@@ -51,19 +61,27 @@ function inWhiteList() {
 }
 
 function testAgainstArray (text, array) {
-	// array-match check, return 1 if match found, 0 otherwise
+	for (var i in array) {
+		if (text.search(array[i]) != -1) {
+			return true;	
+			break;
+		}
+	}
+	return false;
 }
 
 
 
 function showStrictPopup(matches) {
-	// display popup (mention # of matches)
-	// if user hits OK, call enablePage()
+	if (confirm ("You may be getting rickrolled! The site \n\n" + url + "\n\nmentions suspicious phrases " + matches + " times. \n\nClick OK to continue anyway; click Cancel if you have good taste in music.")) {
+		enablePage();
+	}
 }
 
 function showLoosePopup() {
-	// display popup
-	// if user hits OK, call enablePage()
+	if (confirm ("You are getting rickrolled! The site \n\n" + url + "\n\ndoes not seem to wish to give you up.\n\nClick OK to continue anyway; click Cancel if you have good taste in music.")) {
+		enablePage();
+	}
 }
 
 
