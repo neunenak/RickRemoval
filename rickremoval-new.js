@@ -1,3 +1,9 @@
+// ==UserScript==
+// @name           RickRemoval [TEST]
+// @namespace      rickremoval.com
+// @description    Blocks rickrolls using a blacklist and heuristic methods.
+// @include        *
+// ==/UserScript==
 
 var blocklist;
 var whitelist;
@@ -13,17 +19,24 @@ initArrays();
 if (getStrictness()) { // Strict check
 	if (looseCheck()) {
 		disablePage();
-		showStrictPopup();
+		if (showStrictPopup()) {
+			enablePage();
+		}
 	} else {
 		var matches = strictCheck();
 		if (matches >= RICKROLL_THRESHOLD) {
 			disablePage();
-			showLoosePopup(matches);
+			if (showLoosePopup(matches)) {
+				enablePage();
+			}
 		}
 	}
 } else { // Loose check
 	if (!inWhiteList() && looseCheck()) {
 		disablePage();
+		if (showLoosePopup(matches)) {
+			enablePage();
+		}
 	}
 }
 
@@ -73,15 +86,11 @@ function testAgainstArray (text, array) {
 
 
 function showStrictPopup(matches) {
-	if (confirm ("You may be getting rickrolled! The site \n\n" + url + "\n\nmentions suspicious phrases " + matches + " times. \n\nClick OK to continue anyway; click Cancel if you have good taste in music.")) {
-		enablePage();
-	}
+	return confirm ("You may be getting rickrolled! The site \n\n" + url + "\n\nmentions suspicious phrases " + matches + " times. \n\nClick OK to continue anyway; click Cancel if you have good taste in music.");
 }
 
 function showLoosePopup() {
-	if (confirm ("You are getting rickrolled! The site \n\n" + url + "\n\ndoes not seem to wish to give you up.\n\nClick OK to continue anyway; click Cancel if you have good taste in music.")) {
-		enablePage();
-	}
+	return confirm ("You are getting rickrolled! The site \n\n" + url + "\n\ndoes not seem to wish to give you up.\n\nClick OK to continue anyway; click Cancel if you have good taste in music.");
 }
 
 
@@ -126,6 +135,7 @@ function initArrays() {
 	"cxwxBheZniM",
 	"CZoJt0Sbqrs",
 	"DpPhnECPe2I",
+	"D7TJwgucr6I",
 	"dS9DO6kx-Ek",
 	"EEbzptEFsKk",
 	"eKDcl0V6o6k",
@@ -169,6 +179,8 @@ function initArrays() {
 	"QumbExFAj-U",
 	"R5P1_U7LZX8",
 	"r8tXjJL3xcM",
+	"rfp7FbsnsbU",
+	"RgIDuaxiT0w",
 	"RSsJ19sy3JI",
 	"RzoZGNsJ71w",
 	"SGi7qi_y0Jw",
@@ -210,111 +222,67 @@ function initArrays() {
 	"ZIQZHqNQODo",
 	"ZOU8GIRUd_g",
 	"1227.com",
-	"203.24.182.170",
-	"8chan.henriwatson.com/b",
 	"adurah.com/img/hp7_spoilers.jpg",
-	"ali3ns.net",
-	"almightypickle.deviantart.com/art/a-very-stupid-flash-movie-83440015",
-	"apoke.com",
 	"asongbyagayguy.ytmnd.com",
 	"bd.vg",
-	"bit.ly/1628nB",
+	"break.com/index/westboro-church-gets-rick-rolld.html",
 	"bringvictory.com",
 	"chodecircus.com/area51",
 	"choose.yudia.net",
-	"classpc.nl",
 	"collegehumor.com/video:1809841",
 	"comicwonder.com/joke/8a46a9b4a",
-	"crappypc.com",
+	"dafk.net/what/",
+	"dailymotion.com/video/x5ykzv",
 	"ebaumsworld.com/video/watch/411687",
 	"ecritters.biz/sr",
+	"encyclopediadramatica.com/Rickroll",
 	"epicwinrar.com",
-	"evanball.com",
-	"finalclan.net",
-	"freeppcsecrets.com",
-	"fuckdreamhost.com",
-	"furryartpile.com",
+	"fr.video.yahoo.com/watch/651156/3025838",
+	"gametrailers.com/user-movie/kid-rick-rolls-his-entire/208061",
 	"internetisseriousbusiness.com",
-	"irc.infinitynet.info",
 	"johncow.com/moo.html",
-	"just-different.info/secret",
 	"keiraknightley.ytmnd.com",
-	"krazykustoms.co.cc/pages",
-	"krazykustoms.co.cc/phpBB3/index.php",
-	"liner.org",
+	"lfgcomic.com/page/144",
 	"members.tele2.nl/class-pc",
-	"moourl.com/09773",
 	"mxweas.com/docs/jailbreakservhack",
-	"newroupdates.tk",
 	"niya.cc/flash/rick",
-	"noelurl.easyasweb.eu/u0Rx744fi",
-	"palmsout.net/music/remixsunday/104/Never%20Gonna%20Give%20You%20Up%20%28Solly%20Remix%29.mp3",
-	"paulsmom.prohosts.org",
 	"pottermisleading.ytmnd.com",
-	"prankdialer.com/rickroll.php",
 	"pspemporium.webs.com/rickdance.html",
-	"punahou.com",
-	"rasher.dk/r",
-	"rasher.dk/r/linode-dns",
 	"ravenstorm.byethost15.com",
-	"raygoldmodels.com",
 	"reichroll.com",
 	"reichrolled.com",
-	"rfp7FbsnsbU",
-	"RgIDuaxiT0w",
-	"rickroll.net",
 	"rick-rolld.com",
+	"rick-roll.ytmnd.com",
+	"rickroll.com",
+	"rickroll.net",
 	"rickrolled.fr",
-	"rickrolling.com/lol",
+	"rickrolling.com",
 	"rr.rezbit.com",
-	"rubyurl.com/1H1G",
-	"rurl.org/2vq",
-	"sirpnut.info/sorry.jpg",
 	"smouch.net/lol",
 	"sprigler.com/steven",
 	"stucknut.com/locker/files/jessica.gif",
-	"t1ny.us/7wp5i",
+	"stupidvideos.com/video/video_games/RickRoll_Doom",
 	"technocolbert.co.nr",
 	"techsmartly.net",
-	"thekickback.com/rickroll/rickroll.php",
-	"tinyurl.com/244u3n",
-	"tinyurl.com/2nmscj",
-	"tinyurl.com/2tcnbl",
-	"tinyurl.com/2w4apm",
-	"tinyurl.com/37ws8e",
-	"tinyurl.com/4xur8r",
-	"tinyurl.com/5a3jqf",
-	"tinyurl.com/5sb29l",
-	"tinyurl.com/britneyspearsXXX",
-	"tinyurl.com/CELEBRITY-XXX-VIDS",
-	"tinyurl.com/KIM-KARDASHIAN-SEX-TAPE",
-	"tinyurl.com/rickrolll",
-	"tinyurl.com/ynupj4",
-	"tinyurl.com/yowxeq",
 	"tobi-x.com/kate_moss_nude",
-	"todaysbigthing.com/2008/04/07",
-	"todo.is",
-	"url.uppix.net/NFWGJ",
-	"video.hexxeh.net",
-	"video.yahoo.com/watch/1313289/4562193",
+	"video.google.com/videoplay?docid=1085396428282145269",
 	"video.yahoo.com/watch/2013707/v2138974",
 	"video.yahoo.com/watch/804885/3375801",
-	"vids.myspace.com/index.cfm?fuseaction=vids.individual&videoid=25992858",
 	"warlocksnerfed.ytmnd.com",
-	"ww.rickroll.net",
-	"zeroboard.com/16979949",
+	"wiki.ytmnd.com/File:Rickrolled.gif",
+	"wiki.ytmnd.com/Rickroll",
 	"yougotrickrolled.com",
-	"you-host.info",
-	"zideo.nl/index.php?option=com_podfeed&zideo=6c4971596d513d3d&playzideo=6c344f596d31593d&Itemid=",
+	"zideo=6c4971596d513d3d",
 	"rickroll.htm",
 	"rickroll.php"
 	];
 	
 	whitelist = [
-	"googlesyndication.com",
 	"doubleclick.net",
-	"stumbleupon.com/badge/embed",
+	"facebook.com/extern",
 	"facebook.com/plugins",
-	"reddit.com/static/button"
+	"googlesyndication.com",
+	"reddit.com/static/button",
+	"stumbleupon.com/badge/embed"
 	];
 }
